@@ -1,6 +1,6 @@
 variable "project_name" {
   type        = string
-  default     = "liveproject_TAWS"
+  default     = "koffeeluv"
   description = "Name for the live_project"
 }
 
