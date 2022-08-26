@@ -25,35 +25,6 @@ resource "aws_security_group" "BastionSG" {
   }
 }
 
-
-resource "aws_security_group" "APPSG" {
-  name        = "Allow_ssh_for_bastions"
-  description = "Allow SSH Inbound from Bastion Hosts"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    description      = "SSH from Bastions"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    security_groups=[aws_security_group.BastionSG.id]
-    
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    
-  }
-
-  tags = {
-    Name = "Allow Ingress SSH only from Bastions"
-  }
-}
-
-
 resource "aws_security_group" "ECSSG" {
   name        = "Allow_ssh_for_bastions_ECS"
   description = "Allow SSH Inbound from Bastion Hosts"
