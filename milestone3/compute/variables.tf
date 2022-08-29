@@ -10,12 +10,6 @@ variable "region" {
   description = "Region to deploy the Stack in"
 }
 
-variable "AppSubnet_IDs" {
-  type        = map(string)
-  
-  description = "Map of App Subnet IDs"
-}
-
 variable "PublicSubnet_IDs" {
   type        = map(string)
   
@@ -30,14 +24,9 @@ variable "BastionSG" {
   type        = string
   description = "Sec Group Bastions Hosts"
 }
-variable "AppSG" {
-  type        = string
-  description = "Sec Group App Servers"
-}
-variable "ECSSG" {
-  type        = string
-  description = "Sec Group ECS EC2 Nodes"
-}
+
+
+
 
 
 

@@ -16,15 +16,20 @@ module "compute" {
     region           = var.region
     project_name     = var.project_name
     PublicSubnet_IDs = module.network.PublicSubnet_IDs
-    AppSubnet_IDs    = module.network.AppSubnet_IDs
+    
     key_name         = var.key_name
     BastionSG        = module.security.BastionSG
-    AppSG            = module.security.AppSG
-    ECSSG            = module.security.ECSSG
+    
+   
     
 }
 
 module "containers" {
     source = "./containers"
     project_name = var.project_name
+    ECSProfile       = module.security.ECSProfile
+    ECSSG            = module.security.ECSSG
+    key_name         = var.key_name
+    AppSubnet_IDs    = module.network.AppSubnet_IDs
+    
 }
