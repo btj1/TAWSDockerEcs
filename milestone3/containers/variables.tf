@@ -20,6 +20,22 @@ variable "AppSubnet_IDs" {
   
   description = "Map of App Subnet IDs"
 }
-
+variable "ecsTaskExecutionRolearn" {
+  type        = string
+  description = "ecsTaskExecutionRolearn"
+}
+variable "ALBSG" {
+  type        = string
+  description = "Sec Group ALB"
+}
+variable "vpc_id" {
+  type        = string
+  description = "VPC_ID"
+}
+variable "region" {
+  type        = string
+  default     = "us-east-1"
+  description = "Region to deploy the Stack in"
+}
 
 

@@ -44,25 +44,24 @@ resource "aws_security_group" "ECSSG" {
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    security_groups=[aws_security_group.alb.id]
+    security_groups=[aws_security_group.ALBSG.id]
     
   }
    ingress {
-    description      = "Ephemeral from ALB? "
+    description      = "Ephemeral from ALB"
     from_port        = 32768
     to_port          = 65535
     protocol         = "tcp"
-    security_groups=[aws_security_group.alb.id]
+    security_groups=[aws_security_group.ALBSG.id]
     
   }
-
    
    ingress {
-    description      = "Containerport "
+    description      = "Containerport"
     from_port        = 8000
     to_port          = 8000
     protocol         = "tcp"
-    security_groups=[aws_security_group.alb.id]
+    security_groups=[aws_security_group.ALBSG.id]
     
   }
 
@@ -82,7 +81,7 @@ resource "aws_security_group" "ECSSG" {
   }
 }
 
-resource "aws_security_group" "alb" {
+resource "aws_security_group" "ALBSG" {
   name   = "${var.project_name}-sg-alb"
   vpc_id = var.vpc_id
  

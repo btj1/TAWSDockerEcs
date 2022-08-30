@@ -26,11 +26,6 @@ filter {
 
 data "aws_caller_identity" "awsaccount" {}
 
-output "account_id" {
-  value = data.aws_caller_identity.current.account_id
-}
-
-
 ## Create The ECR Private Repo and a Policy 
 
 resource "aws_ecr_repository" "koffeeluvrepo" {
@@ -115,26 +110,24 @@ resource "aws_autoscaling_group" "ecs_asg" {
 
 resource "aws_ecs_task_definition" "task_definition" {
   family             = "${var.project_name}-Website"
-  execution_role_arn = "arn:aws:iam::${data.aws_caller_identity.awsaccount.account_id}:role/ecsTaskExecutionRole"
-  memory             = 1024
-  cpu                = 512
+  execution_role_arn = var.ecsTaskExecutionRolearn 
+  memory             = 128
+  
   container_definitions = jsonencode([
     {
       name      = "${var.project_name}-Website"
-      image     = "${data.aws_caller_identity.awsaccount.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/koffeeluv:latest"
-      cpu       = 512
-      memory    = 1024
+      image     = "${data.aws_caller_identity.awsaccount.account_id}.dkr.ecr.${var.region}.amazonaws.com/koffeeluvrepo:latest"
       essential = true
       portMappings = [
         {
           containerPort = 8000
-          hostPort      = 80
+         
         }
       ]
     }
   ])
 
-  tags {
+  tags = {
       ProjectName = var.project_name
   }
 

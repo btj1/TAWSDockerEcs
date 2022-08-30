@@ -14,8 +14,7 @@ data "aws_iam_policy_document" "ecs_pol" {
 resource "aws_iam_role" "ecsInstancerole" {
   name               = "ecsInstanceRole"
   assume_role_policy = <<EOF
-
-  {
+{
   "Version": "2008-10-17",
   "Statement": [
     {

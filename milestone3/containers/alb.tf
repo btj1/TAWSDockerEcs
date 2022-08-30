@@ -2,8 +2,8 @@ resource "aws_lb" "main" {
   name               = "${var.project_name}-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = var.alb_security_groups
-  subnets            = var.subnets.*.id
+  security_groups    = [var.ALBSG]
+  subnets            = [for r in var.AppSubnet_IDs : r]
  
   enable_deletion_protection = false
 }
@@ -13,7 +13,7 @@ resource "aws_alb_target_group" "main" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
-  target_type = "ip"
+  target_type = "instance"
  
   health_check {
    healthy_threshold   = "3"

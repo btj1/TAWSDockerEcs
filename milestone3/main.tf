@@ -26,10 +26,13 @@ module "compute" {
 
 module "containers" {
     source = "./containers"
+    region = var.region
     project_name = var.project_name
     ECSProfile       = module.security.ECSProfile
     ECSSG            = module.security.ECSSG
+    ALBSG            = module.security.ALBSG
     key_name         = var.key_name
     AppSubnet_IDs    = module.network.AppSubnet_IDs
-    
+    ecsTaskExecutionRolearn = module.security.ecsTaskExecutionRolearn
+    vpc_id = module.network.vpc_id
 }
