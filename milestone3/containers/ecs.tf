@@ -99,7 +99,7 @@ resource "aws_autoscaling_group" "ecs_asg" {
     name                      = "${var.project_name}-asg"
     vpc_zone_identifier       = [for r in var.AppSubnet_IDs : r]
     launch_configuration      = aws_launch_configuration.ecs_launchconf.name
-    desired_capacity          = 2
+    desired_capacity          = 1
     min_size                  = 1
     max_size                  = 3
     health_check_grace_period = 300
