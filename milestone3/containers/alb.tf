@@ -3,7 +3,7 @@ resource "aws_lb" "main" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.ALBSG]
-  subnets            = [for r in var.AppSubnet_IDs : r]
+  subnets            = [for r in var.PublicSubnet_IDs : r]
  
   enable_deletion_protection = false
 }
@@ -16,13 +16,14 @@ resource "aws_alb_target_group" "main" {
   target_type = "instance"
  
   health_check {
-   healthy_threshold   = "3"
+   port                = "traffic-port"
+   healthy_threshold   = "2"
    interval            = "30"
    protocol            = "HTTP"
    matcher             = "200"
    timeout             = "3"
    path                = "/"
-   unhealthy_threshold = "2"
+   unhealthy_threshold = "10"
   }
 }
 

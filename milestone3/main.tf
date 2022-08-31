@@ -33,6 +33,7 @@ module "containers" {
     ALBSG            = module.security.ALBSG
     key_name         = var.key_name
     AppSubnet_IDs    = module.network.AppSubnet_IDs
+    PublicSubnet_IDs = module.network.PublicSubnet_IDs
     ecsTaskExecutionRolearn = module.security.ecsTaskExecutionRolearn
     vpc_id = module.network.vpc_id
 }

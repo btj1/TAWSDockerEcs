@@ -26,8 +26,8 @@ resource "aws_security_group" "BastionSG" {
 }
 
 resource "aws_security_group" "ECSSG" {
-  name        = "Allow_ssh_for_bastions_ECS"
-  description = "Allow SSH Inbound from Bastion Hosts"
+  name        = "Allow Access from Bastion & ALB to ECS Instances"
+  description = "Allow Access from Bastion & ALB to ECS Instances"
   vpc_id      = var.vpc_id
 
   ingress {

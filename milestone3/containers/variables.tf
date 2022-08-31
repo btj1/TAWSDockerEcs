@@ -37,5 +37,10 @@ variable "region" {
   default     = "us-east-1"
   description = "Region to deploy the Stack in"
 }
+variable "PublicSubnet_IDs" {
+  type        = map(string)
+  
+  description = "Map of Public Subnet IDs"
+}
 
 
